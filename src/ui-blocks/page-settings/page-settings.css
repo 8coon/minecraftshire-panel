@@ -14,3 +14,52 @@ body {
   overflow-y: scroll;
   touch-action: pan-y;
   box-sizing: border-box; }
+
+.page-settings .page__content .big-form {
+  padding-right: 45px; }
+  @media only screen and (max-width: 725px) {
+    .page-settings .page__content .big-form {
+      padding-right: 0; } }
+
+.sessions {
+  overflow: hidden;
+  padding-top: 18px;
+  padding-bottom: 18px; }
+  .sessions__expand {
+    display: none; }
+  .sessions_short {
+    position: relative;
+    height: 180px;
+    width: 100%; }
+    .sessions_short .sessions__expand {
+      display: block !important;
+      position: absolute;
+      width: 100%;
+      top: 189px;
+      text-align: center;
+      z-index: 110;
+      font-weight: 700;
+      text-decoration: underline;
+      cursor: pointer; }
+    .sessions_short .sessions__shadow {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      box-shadow: inset 0 -90px 63px -45px white;
+      z-index: 100;
+      pointer-events: none; }
+    .sessions_short .sessions__list {
+      position: absolute;
+      width: 100%;
+      min-height: 450px;
+      z-index: 99; }
+
+.session {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 18px; }
+  .session__title {
+    font-weight: 700; }
+  .session__date {
+    text-align: right; }

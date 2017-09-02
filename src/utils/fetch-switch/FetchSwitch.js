@@ -5,6 +5,9 @@ import {matchPath} from 'react-router-dom';
 // Utils
 import TimeoutPromise from '../TimeoutPromise';
 
+// Блоки
+import LayerNotify from '../../ui-blocks/layer-notify/layer-notify';
+
 
 export default class FetchSwitch extends Component {
 
@@ -38,7 +41,7 @@ export default class FetchSwitch extends Component {
 
         this.setState({
             currentComponent: React.cloneElement(this.futureComponent, props),
-            model: Object.assign(this.state.model, ...models),
+            model: models ? Object.assign(this.state.model, ...models) : this.state.model,
         });
     }
 
@@ -74,15 +77,21 @@ export default class FetchSwitch extends Component {
             this.navigating = true;
 
             const component = this.futureComponent && this.futureComponent.props.component;
-            const promise = component && component.prepare && component.prepare();
+            const promise = component && component.prepare && component.prepare(this.state.model);
 
+            const promises = [this.props.onNavigate(), new TimeoutPromise(0)];
+
+            // Если у компонента был prepare и он вернул Promise
             if (promise && promise.then) {
-                Promise.all([promise, this.props.onNavigate()])
-                    .then(models => this.navigate(models, {location: location, computedMatch: match}));
-            } else {
-                Promise.all([this.props.onNavigate(), new TimeoutPromise(0)])
-                    .then(models => this.navigate(models, {location: location, computedMatch: match}));
+                promises.splice(1, 1, promise);
             }
+
+            Promise.all(promises)
+                .then(models => this.navigate(models, {location: location, computedMatch: match}))
+                .catch(err => {
+                    console.error(err);
+                    LayerNotify.addNotify({text: 'Что-то пошло не так!'});
+                });
         }
 
         return this.state.currentComponent;

@@ -22,6 +22,7 @@ export default class LayoutMain extends Component {
 
     static defaultProps = {
         title: '',
+        className: ''
     };
 
     constructor(props) {
@@ -36,7 +37,7 @@ export default class LayoutMain extends Component {
 
     render() {
         return (
-            <div className="layout-main">
+            <div className={`layout-main ${this.props.className}`}>
                 <Layout style={{boxSizing: 'border-box'}}>
                     <Header onBurgerClick={this.onBurgerClick}/>
                     <Menu ref="menu" title={this.props.title}>

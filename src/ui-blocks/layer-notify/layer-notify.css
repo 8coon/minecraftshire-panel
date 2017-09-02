@@ -33,7 +33,7 @@ body {
     background-color: #333333;
     padding: 3.6px;
     border-radius: 13.5px;
-    width: 270px;
+    width: 450px;
     transition: opacity 0.4s ease-in-out;
     opacity: 0; }
   .layer-notify__content {

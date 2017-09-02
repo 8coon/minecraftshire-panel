@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './page-notifications.css';
-import NoAvatar from '../../assets/no-avatar.jpg';
 
 // Utils
 import {dateDiffInDays, formatDate} from '../../utils/polyfills';

@@ -3,7 +3,7 @@
 
 $menu-width: 220 * $base-unit;
 $menu-item-height: 30 * $base-unit;
-$strip-width: 10 * $base-unit;
+$strip-width: 0; //10 * $base-unit;
 
 
 .menu {
@@ -24,6 +24,7 @@ $strip-width: 10 * $base-unit;
 		transition: width $transition-default,
 					color $transition-default;
 		border-top: $border-default;
+		border-right: $border-default;
 	}
 
 	&__content {
@@ -116,7 +117,6 @@ $strip-width: 10 * $base-unit;
 		&__links {
 			width: $menu-width;
 			border-left: $border-default;
-			border-right: $border-default;
 		}
 
 		&__content {
@@ -159,6 +159,7 @@ $strip-width: 10 * $base-unit;
 			width: $layout-header-burger-size;
 			background-color: $black;
 			border-top: none;
+			border-right: none;
 
 			.menu__item {
 				padding: 5 * $base-unit 0;
