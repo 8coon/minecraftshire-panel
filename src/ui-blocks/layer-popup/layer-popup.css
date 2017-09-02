@@ -53,7 +53,7 @@ a {
     box-sizing: border-box;
     overflow-y: auto;
     z-index: 6000;
-    padding: 27px; }
+    padding: 9px 36px; }
     @media only screen and (max-width: 725px) {
       .layer-popup__window {
         width: 100%;
@@ -66,11 +66,12 @@ a {
       align-items: flex-start; }
     .layer-popup__window__close-button {
       color: #343F4B;
-      font-size: 36px;
+      font-size: 18px;
       font-weight: 100;
       opacity: 0.3;
       cursor: pointer;
-      margin-top: -13.5px; }
+      margin-top: 27px;
+      margin-right: -22.5px; }
       .layer-popup__window__close-button:hover {
         opacity: 0.5; }
       .layer-popup__window__close-button:active {

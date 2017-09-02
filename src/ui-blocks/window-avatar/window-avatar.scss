@@ -1,0 +1,39 @@
+@import "../../globals.scss";
+
+
+.window-avatar {
+	min-width: 600 * $base-unit;
+
+	&__upload {
+		user-select: none;
+		border: 4 * $base-unit dashed $light;
+		border-radius: 10 * $base-unit;
+		padding: 30 * $base-unit;
+		min-height: 110 * $base-unit;
+		margin-top: 20 * $base-unit;
+		margin-bottom: 20 * $base-unit;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+
+		input {
+			border: 2 * $base-unit dotted $light;
+		}
+
+		input, div {
+			padding: 10 * $base-unit;
+		}
+
+		&_dropping {
+			background-color: darken($light, 10%);
+			border-color: $white;
+
+			input, div {
+				display: none;
+			}
+		}
+	}
+}

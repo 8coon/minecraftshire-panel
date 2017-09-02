@@ -22,6 +22,13 @@ a {
     text-decoration: none;
     color: #343F4B; }
 
+.page-settings__avatar-form {
+  padding: 27px;
+  text-align: center; }
+  .page-settings__avatar-form .button {
+    padding-top: 9px;
+    text-align: center !important; }
+
 .page-settings .page__content .big-form {
   padding-right: 45px; }
   @media only screen and (max-width: 725px) {

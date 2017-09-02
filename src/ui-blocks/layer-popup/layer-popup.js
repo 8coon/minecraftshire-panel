@@ -12,17 +12,20 @@ export default class LayerPopup extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {visible: false}
+        this.state = {visible: false};
+
+        this.onBackgroundClick = this.onBackgroundClick.bind(this);
+        this.onWindowClick = this.onWindowClick.bind(this);
     }
 
     static openWindow(window) {
-        LayerPopup.components.push(window);
+        LayerPopup.windows.push(window);
         LayerPopup.toggleComponents(true);
     }
 
     static closeWindow(window) {
-        LayerPopup.components.splice(LayerPopup.components.indexOf(window), 1);
-        LayerPopup.toggleComponents(LayerPopup.components.length === 0 ? false : void 0);
+        LayerPopup.windows.splice(LayerPopup.windows.indexOf(window), 1);
+        LayerPopup.toggleComponents(LayerPopup.windows.length === 0 ? false : void 0);
     }
 
     static toggleComponents(visible) {
@@ -38,13 +41,23 @@ export default class LayerPopup extends Component {
         LayerPopup.components.splice(LayerPopup.components.indexOf(this), 1);
     }
 
+    onBackgroundClick() {
+        const windows = LayerPopup.windows;
+        LayerPopup.closeWindow(windows[windows.length - 1]);
+    }
+
+    onWindowClick(evt) {
+        evt.stopPropagation();
+    }
+
     renderWindows() {
         return LayerPopup.windows.map((window, idx) => {
             return (
                 <div className="layer-popup__window"
                      key={idx}
-                     style={{zIndex: Z_INDEX_BASE + idx}}>
-                    <div className="layer-popup__window__title-bar">
+                     style={{zIndex: Z_INDEX_BASE + idx}}
+                     onClick={this.onWindowClick}>
+                    <div className="layer-popup__window__title-bar" style={{display: 'none'}}>
                         <div className="layer-popup__window__close-button"
                              onClick={() => LayerPopup.closeWindow(window)}>
                             <i className="fa fa-times" aria-hidden="true"/>
@@ -61,7 +74,8 @@ export default class LayerPopup extends Component {
 
     render() {
         return (
-            <div className={`layer-popup ${this.state.visible ? '' : 'layer-popup_hidden'}`}>
+            <div className={`layer-popup ${this.state.visible ? '' : 'layer-popup_hidden'}`}
+                 onClick={this.onBackgroundClick}>
                 <div className="layer-popup__background"/>
                 {this.renderWindows()}
             </div>

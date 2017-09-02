@@ -1,11 +1,24 @@
 @import "../../globals.scss";
 
 
-.page-settings .page__content .big-form {
-	padding-right: 50 * $base-unit;
+.page-settings {
 
-	@include respond-to($handhelds) {
-		padding-right: 0;
+	&__avatar-form {
+		padding: 30 * $base-unit;
+		text-align: center;
+
+		.button {
+			padding-top: 10 * $base-unit;
+			text-align: center !important;
+		}
+	}
+
+	.page__content .big-form {
+		padding-right: 50 * $base-unit;
+
+		@include respond-to($handhelds) {
+			padding-right: 0;
+		}
 	}
 }
 

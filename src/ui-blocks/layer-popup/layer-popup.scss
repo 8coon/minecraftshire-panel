@@ -37,7 +37,7 @@
 		box-sizing: border-box;
 		overflow-y: auto;
 		z-index: 6000;
-		padding: 30 * $base-unit;
+		padding: 10 * $base-unit 40 * $base-unit;
 
 		@include respond-to($handhelds) {
 			width: 100%;
@@ -54,11 +54,12 @@
 
 		&__close-button {
 			color: $black;
-			font-size: 40 * $base-unit;
+			font-size: 20 * $base-unit;
 			font-weight: 100;
 			opacity: $opacity-search;
 			cursor: pointer;
-			margin-top: -15 * $base-unit;
+			margin-top: 30 * $base-unit;
+			margin-right: -25 * $base-unit;
 
 			&:hover {
 				opacity: $opacity-placeholder;
@@ -67,6 +68,9 @@
 			&:active {
 				opacity: $opacity-notify-box;
 			}
+		}
+
+		&__content {
 		}
 	}
 }

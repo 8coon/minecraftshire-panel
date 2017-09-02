@@ -2,9 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './page-settings.css';
 
-// Assets
-import Logo from '../../assets/logo.png';
-
 // Sitemap
 import Sitemap from '../../sitemap';
 
@@ -12,8 +9,11 @@ import Sitemap from '../../sitemap';
 import {UAParser} from 'ua-parser-js';
 
 // UI-Blocks
-import LayerNotify from '../../ui-blocks/layer-notify/layer-notify';
+import LayerNotify from '../layer-notify/layer-notify';
+import LayerPopup from '../layer-popup/layer-popup';
+import WindowAvatar from '../window-avatar/window-avatar';
 import LayoutMain from '../layout-main/layout-main';
+import Avatar from '../avatar/avatar';
 import FormField, {FormFieldTypes, FormFieldModes} from '../form-field/form-field';
 import Delimiter from '../delimiter/delimiter';
 
@@ -50,6 +50,7 @@ export default class PageSettings extends Component {
         this.state = {emailValidated: false, sessionsExpanded: false, tokensExpanded: false};
 
         this.onLogoutEverywhereClick = this.onLogoutEverywhereClick.bind(this);
+        this.onAvatarUploadClick = this.onAvatarUploadClick.bind(this);
         this.onSessionsExpand = this.onSessionsExpand.bind(this);
         this.onTokensExpand = this.onTokensExpand.bind(this);
         this.onEmailSubmit = this.onEmailSubmit.bind(this);
@@ -81,6 +82,10 @@ export default class PageSettings extends Component {
 
         logoutEverywhere()
             .then(() => this.context.router.history.push(Sitemap.login));
+    }
+
+    onAvatarUploadClick() {
+        LayerPopup.openWindow(<WindowAvatar/>);
     }
 
     onEmailSubmit() {
@@ -240,6 +245,7 @@ export default class PageSettings extends Component {
     }
 
     render() {
+        const user = this.context.model.user;
         const profile = this.context.model.profile;
         const email = profile.get('email');
         const password = '*'.repeat(profile.get('passwordLength'));
@@ -314,14 +320,16 @@ export default class PageSettings extends Component {
                 </div>
 
                 <Delimiter text="Смена аватара"/>
-                <div className="big-form">
-                    <div className="big-form__field">
-                        <span className="big-form__field__title"/>
-                        <FormField
-                            type={FormFieldTypes.BUTTON}
-                            mode={FormFieldModes.FLEXIBLE}
-                            text="Поменять"/>
-                    </div>
+                <div className="page-settings__avatar-form">
+                    <span className="page-settings__avatar-form__avatar">
+                        <Avatar url={user.getAvatarFullUrl()} height="200px" width="200px"/>
+                    </span>
+
+                    <FormField
+                        type={FormFieldTypes.BUTTON}
+                        mode={FormFieldModes.FLEXIBLE}
+                        onAction={this.onAvatarUploadClick}
+                        text="Поменять"/>
                 </div>
 
                 <Delimiter text="Активные сессии"/>

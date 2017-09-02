@@ -8,6 +8,8 @@ export default class Avatar extends Component {
     static defaultProps = {
         url: null,
         onClick: () => {},
+        height: null,
+        width: null,
     };
 
     render() {
@@ -15,7 +17,11 @@ export default class Avatar extends Component {
             <div className="avatar"
                  onClick={this.props.onClick}>
                 <span className="avatar__img"
-                      style={{backgroundImage: `url(${this.props.url || NoAvatar})`}}/>
+                      style={{
+                          backgroundImage: `url(${this.props.url || NoAvatar})`,
+                          height: this.props.height,
+                          width: this.props.width,
+                      }}/>
             </div>
         )
     }
