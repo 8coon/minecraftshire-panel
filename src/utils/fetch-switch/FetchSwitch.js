@@ -79,7 +79,7 @@ export default class FetchSwitch extends Component {
             const component = this.futureComponent && this.futureComponent.props.component;
             const promise = component && component.prepare && component.prepare(this.state.model);
 
-            const promises = [this.props.onNavigate(), new TimeoutPromise(0)];
+            const promises = [this.props.onNavigate(), new TimeoutPromise(100)];
 
             // Если у компонента был prepare и он вернул Promise
             if (promise && promise.then) {

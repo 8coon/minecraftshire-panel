@@ -2,6 +2,12 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './page-settings.css';
 
+// Assets
+import Logo from '../../assets/logo.png';
+
+// Sitemap
+import Sitemap from '../../sitemap';
+
 // User-Agent parser
 import {UAParser} from 'ua-parser-js';
 
@@ -21,6 +27,7 @@ import formatDate from '../../utils/formatDate';
 // Requests
 import emailChange from 'minecraftshire-jsapi/src/method/user/emailChange';
 import passwordChange from 'minecraftshire-jsapi/src/method/user/passwordChange';
+import logoutEverywhere from 'minecraftshire-jsapi/src/method/auth/logoutEverywhere';
 import profile from 'minecraftshire-jsapi/src/method/user/profile';
 
 // Services
@@ -42,6 +49,7 @@ export default class PageSettings extends Component {
         super(props);
         this.state = {emailValidated: false, sessionsExpanded: false, tokensExpanded: false};
 
+        this.onLogoutEverywhereClick = this.onLogoutEverywhereClick.bind(this);
         this.onSessionsExpand = this.onSessionsExpand.bind(this);
         this.onTokensExpand = this.onTokensExpand.bind(this);
         this.onEmailSubmit = this.onEmailSubmit.bind(this);
@@ -66,6 +74,13 @@ export default class PageSettings extends Component {
 
     onTokensExpand() {
         this.setState({tokensExpanded: true});
+    }
+
+    onLogoutEverywhereClick(evt) {
+        evt.preventDefault();
+
+        logoutEverywhere()
+            .then(() => this.context.router.history.push(Sitemap.login));
     }
 
     onEmailSubmit() {
@@ -210,11 +225,7 @@ export default class PageSettings extends Component {
         );
     }
 
-
-    render() {
-        const profile = this.context.model.profile;
-        const email = profile.get('email');
-        const password = '*'.repeat(profile.get('passwordLength'));
+    componentDidMount() {
         const sessions = this.context.model.profile.get('sessions');
         const tokens = this.context.model.profile.get('tokens');
 
@@ -226,6 +237,14 @@ export default class PageSettings extends Component {
         if (tokens.length < 5) {
             this.setState({tokensExpanded: true});
         }
+    }
+
+    render() {
+        const profile = this.context.model.profile;
+        const email = profile.get('email');
+        const password = '*'.repeat(profile.get('passwordLength'));
+        const sessions = this.context.model.profile.get('sessions');
+        const tokens = this.context.model.profile.get('tokens');
 
         return (
             <LayoutMain title="Настройки" className="page-settings">
@@ -278,7 +297,6 @@ export default class PageSettings extends Component {
                             type={FormFieldTypes.INPUT}
                             placeholder="Новый пароль"
                             password
-                            text={password}
                             mode={FormFieldModes.FLEXIBLE}
                             validator={Validators.password}
                             onFocus={this.onPasswordFocus}
@@ -307,21 +325,27 @@ export default class PageSettings extends Component {
                 </div>
 
                 <Delimiter text="Активные сессии"/>
-                <div className={`sessions ${this.state.sessionsExpanded ? '' : 'sessions_short'}`}>
-                    <div className="sessions__shadow"/>
-                    <div className="sessions__list">
-                        {this.renderSessions()}
+                <div className="sessions__wrapper">
+                    <div className={`sessions ${this.state.sessionsExpanded ? '' : 'sessions_short'}`}>
+                        <div className="sessions__shadow"/>
+                        <div className="sessions__list">
+                            {this.renderSessions()}
+                        </div>
+                        {this.renderExpand(sessions, this.onSessionsExpand)}
                     </div>
-                    {this.renderExpand(sessions, this.onSessionsExpand)}
                 </div>
+                Вы можете <a href="#" onClick={this.onLogoutEverywhereClick}>закрыть все сессии</a>,
+                Если считаете, что ваш аккаунт мог быть взломан.<br/><br/>
 
                 <Delimiter text="История входов"/>
-                <div className={`sessions ${this.state.tokensExpanded ? '' : 'sessions_short'}`}>
-                    <div className="sessions__shadow"/>
-                    <div className="sessions__list">
-                        {this.renderTokens()}
+                <div className="sessions__wrapper">
+                    <div className={`sessions ${this.state.tokensExpanded ? '' : 'sessions_short'}`}>
+                        <div className="sessions__shadow"/>
+                        <div className="sessions__list">
+                            {this.renderTokens()}
+                        </div>
+                        {this.renderExpand(tokens, this.onTokensExpand)}
                     </div>
-                    {this.renderExpand(tokens, this.onTokensExpand)}
                 </div>
             </LayoutMain>
         );

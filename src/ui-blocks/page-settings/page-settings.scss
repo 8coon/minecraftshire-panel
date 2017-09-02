@@ -11,8 +11,8 @@
 
 .sessions {
 	overflow: hidden;
-	padding-top: 20 * $base-unit;
-	padding-bottom: 20 * $base-unit;
+	padding-top: 15 * $base-unit;
+	padding-bottom: 15 * $base-unit;
 
 	&__expand {
 		display: none;
@@ -33,6 +33,12 @@
 			font-weight: $font-weight-button;
 			text-decoration: underline;
 			cursor: pointer;
+			color: lighten($gray, 35%);
+
+			&:hover {
+				color: lighten($gray, 25%);
+				text-decoration: none;
+			}
 		}
 
 		.sessions__shadow {
@@ -50,6 +56,11 @@
 			min-height: 500 * $base-unit;
 			z-index: 99;
 		}
+	}
+
+	&__wrapper {
+		padding-top: 30 * $base-unit;
+		padding-bottom: 40 * $base-unit;
 	}
 }
 

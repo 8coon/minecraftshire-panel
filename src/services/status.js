@@ -2,9 +2,6 @@
 // Emitter
 import Emitter from 'minecraftshire-utils/src/emitter/Emitter';
 
-// Models
-import User from 'minecraftshire-jsapi/src/models/User/User';
-
 // Methods
 import statusUser from 'minecraftshire-jsapi/src/method/user/status';
 

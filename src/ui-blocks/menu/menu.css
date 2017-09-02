@@ -15,6 +15,13 @@ body {
   touch-action: pan-y;
   box-sizing: border-box; }
 
+a {
+  color: #9ca9b5;
+  text-decoration: underline; }
+  a:hover {
+    text-decoration: none;
+    color: #343F4B; }
+
 .menu {
   justify-content: center;
   display: flex;

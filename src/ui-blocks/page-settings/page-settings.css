@@ -15,6 +15,13 @@ body {
   touch-action: pan-y;
   box-sizing: border-box; }
 
+a {
+  color: #9ca9b5;
+  text-decoration: underline; }
+  a:hover {
+    text-decoration: none;
+    color: #343F4B; }
+
 .page-settings .page__content .big-form {
   padding-right: 45px; }
   @media only screen and (max-width: 725px) {
@@ -23,8 +30,8 @@ body {
 
 .sessions {
   overflow: hidden;
-  padding-top: 18px;
-  padding-bottom: 18px; }
+  padding-top: 13.5px;
+  padding-bottom: 13.5px; }
   .sessions__expand {
     display: none; }
   .sessions_short {
@@ -40,7 +47,11 @@ body {
       z-index: 110;
       font-weight: 700;
       text-decoration: underline;
-      cursor: pointer; }
+      cursor: pointer;
+      color: #bac2cb; }
+      .sessions_short .sessions__expand:hover {
+        color: #9ca9b5;
+        text-decoration: none; }
     .sessions_short .sessions__shadow {
       position: absolute;
       height: 100%;
@@ -53,6 +64,9 @@ body {
       width: 100%;
       min-height: 450px;
       z-index: 99; }
+  .sessions__wrapper {
+    padding-top: 27px;
+    padding-bottom: 36px; }
 
 .session {
   display: flex;
