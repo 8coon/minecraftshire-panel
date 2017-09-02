@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './layout-main.css';
-import Logo from '../../assets/logo.png';
 
 // UI-Blocks
 import Layout from '../layout/layout';

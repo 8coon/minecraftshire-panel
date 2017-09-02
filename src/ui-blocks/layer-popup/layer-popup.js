@@ -28,6 +28,11 @@ export default class LayerPopup extends Component {
         LayerPopup.toggleComponents(LayerPopup.windows.length === 0 ? false : void 0);
     }
 
+    static closeLastWindow() {
+        const lastWindow = LayerPopup.windows[LayerPopup.windows.length - 1];
+        lastWindow && LayerPopup.closeWindow(lastWindow);
+    }
+
     static toggleComponents(visible) {
         LayerPopup.components.forEach(component =>
                 component.setState({visible: visible === void 0 ? component.state.visible : visible}));

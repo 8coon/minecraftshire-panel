@@ -1,0 +1,36 @@
+@import "../../globals.scss";
+
+
+.progress {
+	position: relative;
+	border: 1 * $base-unit solid $black;
+	width: 300 * $base-unit;
+	padding: 0 !important;
+	overflow: hidden;
+	border-radius: $border-radius;
+
+	&_inactive {
+		border: 1 * $base-unit solid darken($light, 45%);
+
+		.progress__bar {
+			width: 70% !important;
+			animation: progress-inactive 0.8s infinite linear;
+			background-color: darken($light, 40%);
+		}
+	}
+
+	&__bar {
+		background-color: $black;
+	}
+}
+
+
+@keyframes progress-inactive {
+	0% {
+		margin-left: -70%;
+	}
+
+	100% {
+		margin-left: 170%
+	}
+}

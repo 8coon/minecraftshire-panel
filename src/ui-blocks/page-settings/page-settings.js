@@ -301,7 +301,7 @@ export default class PageSettings extends Component {
                         <FormField
                             ref={this.passwordForm.add('new_password')}
                             type={FormFieldTypes.INPUT}
-                            placeholder="Новый пароль"
+                            placeholder="Придумайте новый пароль"
                             password
                             mode={FormFieldModes.FLEXIBLE}
                             validator={Validators.password}
@@ -342,7 +342,7 @@ export default class PageSettings extends Component {
                         {this.renderExpand(sessions, this.onSessionsExpand)}
                     </div>
                 </div>
-                Вы можете <a href="#" onClick={this.onLogoutEverywhereClick}>закрыть все сессии</a>,
+                Вы можете <a href="#close" onClick={this.onLogoutEverywhereClick}>закрыть все сессии</a>,
                 Если считаете, что ваш аккаунт мог быть взломан.<br/><br/>
 
                 <Delimiter text="История входов"/>

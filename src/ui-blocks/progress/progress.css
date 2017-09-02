@@ -1,0 +1,45 @@
+body {
+  height: 100%; }
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #f7f7f8;
+  color: white;
+  font-family: "Open Sans", Helvetica, "Segoe UI", sans-serif;
+  font-size: 15px;
+  font-weight: 400; }
+
+.scrollable {
+  overflow-y: scroll;
+  touch-action: pan-y;
+  box-sizing: border-box; }
+
+a {
+  color: #9ca9b5;
+  text-decoration: underline; }
+  a:hover {
+    text-decoration: none;
+    color: #343F4B; }
+
+.progress {
+  position: relative;
+  border: 0.9px solid #343F4B;
+  width: 270px;
+  padding: 0 !important;
+  overflow: hidden;
+  border-radius: 4.5px; }
+  .progress_inactive {
+    border: 0.9px solid #757e87; }
+    .progress_inactive .progress__bar {
+      width: 70% !important;
+      animation: progress-inactive 0.8s infinite linear;
+      background-color: #838b93; }
+  .progress__bar {
+    background-color: #343F4B; }
+
+@keyframes progress-inactive {
+  0% {
+    margin-left: -70%; }
+  100% {
+    margin-left: 170%; } }
