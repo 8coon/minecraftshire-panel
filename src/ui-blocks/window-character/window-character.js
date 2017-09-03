@@ -14,6 +14,9 @@ import Form from '../../form/form';
 // Utils
 import Validators from '../../utils/validators/validators';
 
+// Requests
+import createCharacter from 'minecraftshire-jsapi/src/method/character/create';
+
 
 export default class WindowCharacter extends Component {
 
@@ -51,6 +54,26 @@ export default class WindowCharacter extends Component {
     onSubmit() {
         this.setState({validated: true});
         if (!this.form.validate()) return;
+
+        const firstName = this.form.fields['firstName'];
+        const lastName = this.form.fields['lastName'];
+
+        createCharacter(firstName.getText(), lastName.getText())
+            .then(() => {
+                LayerPopup.closeLastWindow();
+                LayerNotify.addNotify({text: 'Персонаж успешно создан!'});
+                // Todo: navigate
+            })
+            .catch(err => {
+                if (err.body && err.body.cause === 'character_exists') {
+                    firstName.validate('Такой персонаж уже существует!');
+                    firstName.toggleTooltip(true);
+
+                    return;
+                }
+
+                LayerNotify.addNotify({text: 'Что-то пошло не так!'});
+            });
     }
 
     render() {

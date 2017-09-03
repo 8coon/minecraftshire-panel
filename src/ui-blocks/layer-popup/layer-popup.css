@@ -54,7 +54,8 @@ a {
     overflow-y: auto;
     z-index: 6000;
     padding: 9px 36px;
-    position: relative; }
+    position: relative;
+    overflow-x: visible; }
     @media only screen and (max-width: 725px) {
       .layer-popup__window {
         width: 100%;
