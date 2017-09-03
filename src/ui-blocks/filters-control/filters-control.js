@@ -34,14 +34,16 @@ export default class FiltersControl extends Component {
                 <div className={`filters-control__filter filters-control__filter_favorite ${
                         this.props.filters.favorite ? 'filters-control__filter_active' : ''
                     }`}
-                     onClick={this.onFavoriteClick}>
+                     onClick={this.onFavoriteClick}
+                     title="Показать избранных персонажей">
                     <i className="fa fa-star" aria-hidden="true"/>
                 </div>
 
                 <div className={`filters-control__filter filters-control__filter_online ${
                     this.props.filters.online ? 'filters-control__filter_active' : ''
                     }`}
-                     onClick={this.onOnlineClick}>
+                     onClick={this.onOnlineClick}
+                     title="Показать персонажей в сети">
                     <i className="fa fa-circle" aria-hidden="true"/>
                 </div>
             </div>

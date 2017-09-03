@@ -27,6 +27,10 @@ export default class PageCharacters extends Component {
         const path = router.route.location.pathname;
         let username = path.split('/')[2] || '';
 
+        if (username === 'characters') {
+            username = path.split('/')[3] || '';
+        }
+
         if (username.length === 0) {
             username = null;
         }
