@@ -80,7 +80,9 @@ a {
     .layer-popup__window__buttons {
       display: flex;
       flex-direction: row;
-      justify-content: flex-end; }
+      justify-content: flex-end;
+      padding-bottom: 18px;
+      padding-top: 9px; }
       .layer-popup__window__buttons .button {
         display: inline-block; }
         .layer-popup__window__buttons .button button {

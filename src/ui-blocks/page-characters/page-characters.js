@@ -6,6 +6,8 @@ import './page-characters.css';
 import LayoutMain from '../layout-main/layout-main';
 import Character from '../character/character';
 import Filters from '../filters/filters';
+import LayerPopup from '../layer-popup/layer-popup';
+import WindowCharacter from '../window-character/window-character';
 
 // Requests
 import profile from 'minecraftshire-jsapi/src/method/user/profile';
@@ -49,7 +51,7 @@ export default class PageCharacters extends Component {
     }
 
     onAddClick() {
-
+        LayerPopup.openWindow(<WindowCharacter/>);
     }
 
     renderCharacters() {

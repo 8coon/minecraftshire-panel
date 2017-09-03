@@ -38,4 +38,8 @@ export default {
         return true;
     },
 
+    name(value) {
+        return true;
+    }
+
 }

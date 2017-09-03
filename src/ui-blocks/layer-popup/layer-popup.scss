@@ -75,6 +75,8 @@
 			display: flex;
 			flex-direction: row;
 			justify-content: flex-end;
+			padding-bottom: 20 * $base-unit;
+			padding-top: 10 * $base-unit;
 
 			.button {
 				display: inline-block;
