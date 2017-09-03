@@ -78,7 +78,7 @@ export default class PageCharacters extends Component {
                 const name1 = `${char1.get('firstName')} ${char1.get('lastName')}`;
                 const name2 = `${char2.get('firstName')} ${char2.get('lastName')}`;
 
-                return name1 > name2;
+                return name1.localeCompare(name2);
             });
 
         return characters.map(character => {
