@@ -25,6 +25,7 @@ import PageRestoreSuccess from './ui-blocks/page-restore-success/page-restore-su
 import PagePasswordReset from './ui-blocks/page-password-reset/page-password-reset';
 import PageSettings from './ui-blocks/page-settings/page-settings';
 import PageNotifications from './ui-blocks/page-notifications/page-notifications';
+import PageCharacters from './ui-blocks/page-characters/page-characters';
 
 // Service Worker
 import registerServiceWorker from './registerServiceWorker';
@@ -48,6 +49,7 @@ ReactDOM.render(
             <Route exact path={Sitemap.passwordReset} component={PagePasswordReset}/>
             <Route exact path={Sitemap.settings} component={PageSettings}/>
             <Route exact path={Sitemap.notifications} component={PageNotifications}/>
+            <Route alwaysReload path={Sitemap.characters + ':username?'} component={PageCharacters}/>
         </FetchSwitch>
     </BrowserRouter>,
 

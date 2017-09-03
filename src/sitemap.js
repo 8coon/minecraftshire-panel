@@ -12,4 +12,5 @@ export default {
     passwordReset: `${appRoot}/password_reset`,
     settings: `${appRoot}/settings`,
     notifications: `${appRoot}/notifications`,
+    characters: `${appRoot}/characters`,
 };

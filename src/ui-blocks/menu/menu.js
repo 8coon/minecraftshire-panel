@@ -60,17 +60,30 @@ export default class Menu extends Component {
         this.toggle();
     }
 
-    renderMenuItem(link, text, icon, counter = 0) {
-        const location = trimLocation(this.context.router.route.location.pathname);
+    renderMenuItem(link, text, icon, counter = 0, forced = false) {
+        const model = this.context.model;
+        const router = this.context.router;
+        const location = trimLocation(router.route.location.pathname);
         const route = !link ? Sitemap.root : Sitemap[link];
         counter = counter === 0 ? null : (counter < 100 ? counter : '99+');
+
+        let onClick = !link ? this.onBurgerClick : null;
+
+        // Если true, перезагружаем страницу
+        // Todo: найти лучший способ
+        if (forced) {
+            onClick = () => {
+                model.forced = true;
+                router.history.push(Sitemap[link]);
+            }
+        }
 
         return (
             <Link to={route} title={text}
                   className={`menu__item ${location === route ? 'menu__item_selected' : ''} ${
                         !link ? 'menu__item_grayed' : ''
                       }`}
-                  onClick={!link ? this.onBurgerClick : null}>
+                  onClick={onClick}>
                 <div className="menu__item__icon">
                     <i className={`fa ${icon}`} aria-hidden="true"/>
                     {counter !== null && (
@@ -105,7 +118,7 @@ export default class Menu extends Component {
                 {/*state !== 'normal' && state !== 'small' && this.renderMenuItem(null, 'Скрыть', 'fa-bars')*/}
                 {this.renderMenuItem('root', 'Профиль', 'fa-user')}
                 {this.renderMenuItem('notifications', 'Уведомления', 'fa-bell', this.state.unreadCount)}
-                {this.renderMenuItem('root', 'Персонажи', 'fa-users')}
+                {this.renderMenuItem('characters', 'Персонажи', 'fa-users', 0, true)}
                 {this.renderMenuItem('root', 'Государства', 'fa-flag')}
                 {this.renderMenuItem('root', 'Финансы', 'fa-usd')}
                 {this.renderMenuItem('root', 'Галерея', 'fa-camera-retro')}

@@ -38,6 +38,7 @@ export default class FetchSwitch extends Component {
 
     navigate(models, props) {
         this.navigating = false;
+        this.state.model.forced = false;
 
         this.setState({
             currentComponent: React.cloneElement(this.futureComponent, props),
@@ -72,14 +73,15 @@ export default class FetchSwitch extends Component {
 
         this.futureComponent = match ? child : null;
 
-        if (!this.navigating && (!this.state.currentComponent ||
+        if (!this.navigating && (!this.state.currentComponent || this.state.model.forced ||
                 this.futureComponent.props.path !== this.state.currentComponent.props.path)) {
             this.navigating = true;
 
             const component = this.futureComponent && this.futureComponent.props.component;
-            const promise = component && component.prepare && component.prepare(this.state.model);
+            const promise = component && component.prepare &&
+                component.prepare(this.state.model, this.context.router, match);
 
-            const promises = [this.props.onNavigate(), new TimeoutPromise(100)];
+            const promises = [this.props.onNavigate(), new TimeoutPromise(10)];
 
             // Если у компонента был prepare и он вернул Promise
             if (promise && promise.then) {
