@@ -158,6 +158,9 @@ a {
             background-color: #5A6978; }
           .menu .menu__links_small .menu__item_grayed:hover {
             background-color: #343F4B !important; } }
+  @media only screen and (max-width: 500px) {
+    .menu .menu__links_small {
+      width: 0; } }
 
 .page__title {
   width: 100%;

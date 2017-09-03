@@ -69,6 +69,15 @@
 			flex: 1;
 			justify-content: flex-end;
 		}
+
+		@include respond-to($handhelds) {
+			flex-direction: column;
+
+			.big-form__field__title {
+				text-align: left;
+				margin-left: 5 * $base-unit;
+			}
+		}
 	}
 
 }

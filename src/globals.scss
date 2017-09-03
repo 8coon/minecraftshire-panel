@@ -83,14 +83,19 @@ $page-content-padding: 35 * $base-unit;
 $border-default: solid $very-light-gray 1 * $base-unit;
 
 
+$small-handhelds: small-handhelds;
 $handhelds: handhelds;
 $tablets: tablets;
 $desktop: desktop;
+$max-small-handhelds: 500px;
 $max-handhelds: 725px;
 $min-desktop: 1025px;
 
 @mixin respond-to($media) {
-	@if $media == $handhelds {
+	@if $media == $small-handhelds {
+		@media only screen and (max-width: $max-small-handhelds) { @content; }
+	}
+	@else if $media == $handhelds {
 		@media only screen and (max-width: $max-handhelds) { @content; }
 	}
 	@else if $media == $tablets {

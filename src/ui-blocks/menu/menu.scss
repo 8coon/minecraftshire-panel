@@ -203,6 +203,12 @@ $strip-width: 0; //10 * $base-unit;
 			}
 		}
 	}
+
+	@include respond-to($small-handhelds) {
+		.menu__links_small {
+			width: 0;
+		}
+	}
 }
 
 
