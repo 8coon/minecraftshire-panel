@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import './page-login.css';
 
@@ -23,6 +24,10 @@ import loginUser from 'minecraftshire-jsapi/src/method/auth/login';
 export default class PageLogin extends Component {
 
     form = new Form();
+
+    static contextTypes = {
+        router: PropTypes.object,
+    };
 
     constructor(props) {
         super(props);
@@ -52,10 +57,10 @@ export default class PageLogin extends Component {
 
         loginUser(username, password)
             .then(res => {
-               Storage.setUsername(username);
-               Storage.set('authToken', res.authToken);
+                Storage.setUsername(username);
+                Storage.set('authToken', res.authToken);
 
-               alert('ok!');
+                this.context.router.history.push(Sitemap.settings); // Todo: Profile
             })
             .catch(xhr => {
                 if (!xhr || !xhr.body || xhr.body.error !== 'wrong credentials') {
