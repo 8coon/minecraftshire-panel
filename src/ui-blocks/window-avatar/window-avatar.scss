@@ -4,6 +4,10 @@
 .window-avatar {
 	min-width: 600 * $base-unit;
 
+	@include respond-to($handhelds) {
+		min-width: 0;
+	}
+
 	&__upload {
 		user-select: none;
 		border: 4 * $base-unit dashed $light;

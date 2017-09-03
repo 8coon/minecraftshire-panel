@@ -24,6 +24,9 @@ a {
 
 .window-avatar {
   min-width: 540px; }
+  @media only screen and (max-width: 725px) {
+    .window-avatar {
+      min-width: 0; } }
   .window-avatar__upload {
     user-select: none;
     border: 3.6px dashed #F0F1F2;

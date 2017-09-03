@@ -5,6 +5,7 @@ import './window-avatar.css';
 import LayerPopup from '../layer-popup/layer-popup';
 import LayerNotify from '../layer-notify/layer-notify';
 import Progress from '../progress/progress';
+import Button from '../button/button';
 
 // Requests
 import Request, {RequestEvent} from 'minecraftshire-jsapi/src/request/Request';
@@ -27,6 +28,7 @@ export default class WindowAvatar extends Component {
         this.onDrop = this.onDrop.bind(this);
         this.onFileChange = this.onFileChange.bind(this);
         this.onUploadProgress = this.onUploadProgress.bind(this);
+        this.onCancelClick = this.onCancelClick.bind(this);
     }
 
     onDragOver(evt) {
@@ -54,7 +56,16 @@ export default class WindowAvatar extends Component {
         progress.setState({loaded: evt.details.loaded, total: evt.details.total});
     }
 
+    onCancelClick() {
+        LayerPopup.closeLastWindow();
+    }
+
     upload(file) {
+        if (!file) {
+            this.setState({dropping: false});
+            return;
+        }
+
         if (!(file.type === 'image/jpeg' || file.type === 'image/png')) {
             LayerNotify.addNotify({text: 'Допустимые форматы: JPG, PNG.'});
             return;
@@ -138,6 +149,10 @@ export default class WindowAvatar extends Component {
                         </div>
                     )}
 
+                </div>
+
+                <div className="layer-popup__window__buttons">
+                    <Button text="Отмена" onClick={this.onCancelClick}/>
                 </div>
             </div>
         )

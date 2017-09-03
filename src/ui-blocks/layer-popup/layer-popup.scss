@@ -71,6 +71,20 @@
 			}
 		}
 
+		&__buttons {
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-end;
+
+			.button {
+				display: inline-block;
+
+				button {
+					min-width: 150 * $base-unit;
+				}
+			}
+		}
+
 		&__content {
 		}
 	}

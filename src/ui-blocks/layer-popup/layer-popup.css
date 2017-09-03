@@ -77,3 +77,11 @@ a {
         opacity: 0.5; }
       .layer-popup__window__close-button:active {
         opacity: 0.7; }
+    .layer-popup__window__buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end; }
+      .layer-popup__window__buttons .button {
+        display: inline-block; }
+        .layer-popup__window__buttons .button button {
+          min-width: 135px; }
