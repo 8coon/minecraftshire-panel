@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import './window-avatar.css';
+import PropTypes from 'prop-types';
+import './window-upload.css';
 
 // UI-Blocks
 import LayerPopup from '../layer-popup/layer-popup';
@@ -9,7 +10,6 @@ import Button from '../button/button';
 
 // Requests
 import Request, {RequestEvent} from 'minecraftshire-jsapi/src/request/Request';
-import uploadAvatar from 'minecraftshire-jsapi/src/method/user/uploadAvatar';
 import upload from 'minecraftshire-jsapi/src/method/upload/upload';
 import uploadStatus from 'minecraftshire-jsapi/src/method/upload/status';
 
@@ -18,6 +18,20 @@ import retry from '../../utils/retry';
 
 
 export default class WindowAvatar extends Component {
+
+    static defaultProps = {
+        formats: [
+            {type: 'image/jpeg', ext: 'JPG'},
+            {type: 'image/png', ext: 'PNG'},
+        ],
+        onUpload: () => Promise.resolve(),
+        title: '',
+    };
+
+    static contextTypes = {
+        router: PropTypes.object,
+        model: PropTypes.object,
+    };
 
     constructor(props) {
         super(props);
@@ -60,18 +74,24 @@ export default class WindowAvatar extends Component {
         LayerPopup.closeLastWindow();
     }
 
+    getFormatExts() {
+        return this.props.formats
+            .map(format => format.ext)
+            .join(', ');
+    }
+
     upload(file) {
         if (!file) {
             this.setState({dropping: false});
             return;
         }
 
-        if (!(file.type === 'image/jpeg' || file.type === 'image/png')) {
-            LayerNotify.addNotify({text: 'Допустимые форматы: JPG, PNG.'});
+        if (!this.props.formats.some(format => file.type === format.type)) {
+            LayerNotify.addNotify({text: `Допустимые форматы: ${this.getFormatExts()}.`});
             return;
         }
 
-        // Проверяем, что размер файла несколько меньше, чем 1Mb
+        // Проверяем, что размер файла несколько меньше, чем 10Mb
         if (file.size > 10 * 1024 * 1000) {
             LayerNotify.addNotify({text: 'Размер файла превышает 10 Мб!'});
             return;
@@ -80,7 +100,7 @@ export default class WindowAvatar extends Component {
         this.setState({uploading: true, progress: 0});
         let token;
 
-        uploadAvatar()
+        this.props.onUpload()
             .then(tok => {
                 token = tok;
                 Request.$on(RequestEvent.PROGRESS, this.onUploadProgress);
@@ -104,7 +124,11 @@ export default class WindowAvatar extends Component {
             })
             .then(() => {
                 LayerPopup.closeLastWindow();
-                window.location.reload();
+                const router = this.context.router;
+                const model = this.context.model;
+
+                model.forced = true;
+                router.history.push(router.route.match.location);
             })
             .catch(err => {
                 console.error(err);
@@ -119,11 +143,11 @@ export default class WindowAvatar extends Component {
     render() {
         return (
             <div className="window-avatar">
-                <h2>Загрузить аватар</h2>
+                <h2>{this.props.title}</h2>
 
                 <ul>
                     <li>Максимальный размер: <strong>10 Мб</strong></li>
-                    <li>Поддерживаемые форматы: <strong>JPG, PNG</strong></li>
+                    <li>Поддерживаемые форматы: <strong>{this.getFormatExts()}</strong></li>
                 </ul>
 
                 {this.state.uploading && (

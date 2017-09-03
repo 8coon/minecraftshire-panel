@@ -7,9 +7,12 @@ import DefaultSkin from '../../assets/default-skin.png';
 // UI-Blocks
 import LayoutMain from '../layout-main/layout-main';
 import Button from '../button/button';
+import LayerPopup from '../layer-popup/layer-popup';
+import WindowUpload from '../window-upload/window-upload';
 
 // Requests
 import getCharacter from 'minecraftshire-jsapi/src/method/character/get';
+import uploadSkin from 'minecraftshire-jsapi/src/method/character/uploadSkin';
 
 // Sitemap
 import Sitemap from '../../sitemap';
@@ -46,7 +49,9 @@ export default class PageCharacter extends Component {
     }
 
     onSkinChangeClick() {
-
+        LayerPopup.openWindow(<WindowUpload onUpload={() => uploadSkin(this.context.model.character.get('id'))}
+                                            formats={[{type: 'image/png', ext: 'PNG'}]}
+                                            title="Загрузить скин"/>);
     }
 
     render() {

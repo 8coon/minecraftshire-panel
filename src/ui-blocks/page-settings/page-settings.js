@@ -11,7 +11,7 @@ import {UAParser} from 'ua-parser-js';
 // UI-Blocks
 import LayerNotify from '../layer-notify/layer-notify';
 import LayerPopup from '../layer-popup/layer-popup';
-import WindowAvatar from '../window-avatar/window-avatar';
+import WindowAvatar from '../window-upload/window-upload';
 import LayoutMain from '../layout-main/layout-main';
 import Avatar from '../avatar/avatar';
 import FormField, {FormFieldTypes, FormFieldModes} from '../form-field/form-field';
@@ -29,6 +29,7 @@ import emailChange from 'minecraftshire-jsapi/src/method/user/emailChange';
 import passwordChange from 'minecraftshire-jsapi/src/method/user/passwordChange';
 import logoutEverywhere from 'minecraftshire-jsapi/src/method/auth/logoutEverywhere';
 import profile from 'minecraftshire-jsapi/src/method/user/profile';
+import uploadAvatar from 'minecraftshire-jsapi/src/method/user/uploadAvatar';
 
 // Services
 import Status from '../../services/status';
@@ -84,7 +85,8 @@ export default class PageSettings extends Component {
     }
 
     onAvatarUploadClick() {
-        LayerPopup.openWindow(<WindowAvatar/>);
+        LayerPopup.openWindow(<WindowAvatar onUpload={uploadAvatar}
+                                            title="Загрузить аватар"/>);
     }
 
     onEmailSubmit() {
