@@ -29,11 +29,12 @@ export default class Character extends Component {
         this.onFavoriteClick = this.onFavoriteClick.bind(this);
     }
 
-    onFavoriteClick() {
+    onFavoriteClick(evt) {
         if (!this.props.editable) {
             return;
         }
 
+        evt.preventDefault();
         const model = this.props.model;
         const nextValue = !model.get('isFavorite');
 
@@ -67,6 +68,7 @@ export default class Character extends Component {
             let lenDiff = 0;
             let index;
 
+            // eslint-disable-next-line
             while ((index = lowerName.indexOf(query, lastIndex)) !== -1) {
                 lastIndex = index + 1;
 
@@ -118,7 +120,7 @@ export default class Character extends Component {
 
                 {!this.props.add && (
                     <div className="character__avatar">
-                        <Avatar url={model.getSkinFullUrl()}/>
+                        <Avatar url={model.getSkinFullUrl()} skin/>
                     </div>
                 )}
 

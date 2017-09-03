@@ -24,3 +24,6 @@ a {
 
 .page-characters__list {
   padding-top: 9px; }
+  .page-characters__list a {
+    text-decoration: none;
+    color: #343F4B; }

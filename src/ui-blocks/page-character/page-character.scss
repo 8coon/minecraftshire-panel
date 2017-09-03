@@ -1,0 +1,46 @@
+@import "../../globals.scss";
+
+
+.page-character {
+	.character-details {
+		display: flex;
+		flex-direction: row;
+		align-items: stretch;
+		justify-content: flex-start;
+		padding-top: 10 * $base-unit;
+
+		@include respond-to($handhelds) {
+			flex-direction: column;
+		}
+
+		&__skin {
+			position: relative;
+			flex: 2;
+			padding-right: 40 * $base-unit;
+
+			img {
+				width: 100%;
+				image-rendering: pixelated;
+			}
+
+			.button {
+				text-align: center;
+				padding-top: 15 * $base-unit;
+				padding-bottom: 15 * $base-unit;
+
+				button {
+					min-width: 140 * $base-unit;
+				}
+			}
+		}
+
+		&__info {
+			padding-left: 10 * $base-unit;
+			flex: 1;
+
+			div {
+				padding-bottom: 10 * $base-unit;
+			}
+		}
+	}
+}

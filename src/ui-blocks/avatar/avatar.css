@@ -32,3 +32,5 @@ a {
     background-size: cover;
     background-position: center;
     border-radius: 50%; }
+    .avatar__img_skin {
+      image-rendering: pixelated; }

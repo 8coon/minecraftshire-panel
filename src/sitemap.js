@@ -13,4 +13,5 @@ export default {
     settings: `${appRoot}/settings`,
     notifications: `${appRoot}/notifications`,
     characters: `${appRoot}/characters`,
+    character: `${appRoot}/character`,
 };

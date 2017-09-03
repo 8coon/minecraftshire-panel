@@ -7,6 +7,7 @@ import LayerPopup from '../layer-popup/layer-popup';
 import LayerNotify from '../layer-notify/layer-notify';
 import Button from '../button/button';
 import FormField, {FormFieldTypes, FormFieldModes} from '../form-field/form-field';
+import PageCharacter from '../page-character/page-character';
 
 // Form
 import Form from '../../form/form';
@@ -16,6 +17,12 @@ import Validators from '../../utils/validators/validators';
 
 // Requests
 import createCharacter from 'minecraftshire-jsapi/src/method/character/create';
+
+// Sitemap
+import Sitemap from '../../sitemap';
+
+// Models
+import Character from 'minecraftshire-jsapi/src/models/Character/Character';
 
 
 export default class WindowCharacter extends Component {
@@ -60,9 +67,13 @@ export default class WindowCharacter extends Component {
 
         createCharacter(firstName.getText(), lastName.getText())
             .then(() => {
+                const character = new Character();
+                character.set('firstName', firstName.getText());
+                character.set('lastName', lastName.getText());
+
                 LayerPopup.closeLastWindow();
-                LayerNotify.addNotify({text: 'Персонаж успешно создан!'});
-                // Todo: navigate
+                window.setTimeout(() => this.context.router.history.push(PageCharacter.getUrl(character)), 10);
+                window.setTimeout(() => LayerNotify.addNotify({text: 'Персонаж успешно создан!'}), 500);
             })
             .catch(err => {
                 if (err.body && err.body.cause === 'character_exists') {
@@ -72,6 +83,7 @@ export default class WindowCharacter extends Component {
                     return;
                 }
 
+                console.error(err);
                 LayerNotify.addNotify({text: 'Что-то пошло не так!'});
             });
     }

@@ -38,12 +38,30 @@ export default class FetchSwitch extends Component {
 
     navigate(models, props) {
         this.navigating = false;
+        // eslint-disable-next-line
         this.state.model.forced = false;
 
         this.setState({
             currentComponent: React.cloneElement(this.futureComponent, props),
             model: models ? Object.assign(this.state.model, ...models) : this.state.model,
         });
+    }
+
+    getFirstPathArg() {
+        let pathname = this.context.router.route.location.pathname;
+
+        if (pathname.endsWith('/')) {
+            pathname = pathname.substring(0, pathname.length - 1);
+        }
+
+        const path = pathname.split('/');
+        const arg = path[path.length - 1];
+
+        if (arg.length === 0) {
+            return null;
+        }
+
+        return arg;
     }
 
     render() {
@@ -79,7 +97,7 @@ export default class FetchSwitch extends Component {
 
             const component = this.futureComponent && this.futureComponent.props.component;
             const promise = component && component.prepare &&
-                component.prepare(this.state.model, this.context.router, match);
+                component.prepare(this.state.model, this.context.router, this.getFirstPathArg());
 
             const promises = [this.props.onNavigate(), new TimeoutPromise(10)];
 

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './page-characters.css';
 
@@ -8,12 +9,16 @@ import Character from '../character/character';
 import Filters from '../filters/filters';
 import LayerPopup from '../layer-popup/layer-popup';
 import WindowCharacter from '../window-character/window-character';
+import PageCharacter from '../page-character/page-character';
 
 // Requests
 import profile from 'minecraftshire-jsapi/src/method/user/profile';
 
 // Services
 import Status from '../../services/status';
+
+// Sitemap
+import Sitemap from '../../sitemap';
 
 
 export default class PageCharacters extends Component {
@@ -23,15 +28,8 @@ export default class PageCharacters extends Component {
         model: PropTypes.object,
     };
 
-    static prepare(model, router) {
-        const path = router.route.location.pathname;
-        let username = path.split('/')[2] || '';
-
+    static prepare(model, router, username) {
         if (username === 'characters') {
-            username = path.split('/')[3] || '';
-        }
-
-        if (username.length === 0) {
             username = null;
         }
 
@@ -84,9 +82,14 @@ export default class PageCharacters extends Component {
             });
 
         return characters.map(character => {
-            return <Character model={character}
-                              key={character.get('id')}
-                              query={filters.query}/>
+            return (
+                <Link to={PageCharacter.getUrl(character)}
+                      key={character.get('id')}>
+                    <Character model={character}
+                               key={character.get('id')}
+                               query={filters.query}/>
+                </Link>
+            );
         });
     }
 
