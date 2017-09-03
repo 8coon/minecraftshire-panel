@@ -22,7 +22,7 @@ export default (date) => {
             return 'Сегодня';
         }
 
-        if (now.getDate() + 1 === date.getDate()) {
+        if (now.getDate() - 1 === date.getDate()) {
             return 'Вчера';
         }
     }

@@ -38,7 +38,6 @@ export default class PageSettings extends Component {
 
     emailForm = new Form();
     passwordForm = new Form();
-    avatarForm = new Form();
 
     static contextTypes = {
         router: PropTypes.object,
@@ -215,12 +214,14 @@ export default class PageSettings extends Component {
             return null;
         }
 
-        if (lastDigit === '1') {
-            word = 'запись';
-        }
+        if (length > 20) {
+            if (lastDigit === '1') {
+                word = 'запись';
+            }
 
-        if (lastDigit >= 2 && lastDigit < 5) {
-            word = 'записи';
+            if (lastDigit >= 2 && lastDigit < 5) {
+                word = 'записи';
+            }
         }
 
         return (
