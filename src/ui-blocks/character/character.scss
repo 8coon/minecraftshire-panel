@@ -18,12 +18,34 @@
 		background-color: $light-hover;
 	}
 
+	&_add {
+		.character__name {
+			opacity: 0.5;
+		}
+
+		i {
+			color: $green;
+			font-size: 50 * $base-unit;
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 30 * $base-unit;
+		}
+	}
+
 	&__avatar {
 		padding-bottom: 10 * $base-unit;
 
 		> .avatar > * {
 			height: 80 * $base-unit;
 			width: 80 * $base-unit;
+		}
+	}
+
+	&__name {
+		&__highlight {
+			background-color: $yellow;
+			box-shadow: 0 0 1 * $base-unit $gray;
 		}
 	}
 
@@ -62,6 +84,7 @@
 			font-size: 80%;
 			color: $light-green;
 			visibility: hidden;
+			text-shadow: 0 0 1 * $base-unit $gray;
 
 			&_true {
 				visibility: visible;

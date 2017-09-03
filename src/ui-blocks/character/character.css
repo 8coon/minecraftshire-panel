@@ -36,11 +36,23 @@ a {
   text-align: center; }
   .character:hover {
     background-color: #fafafb; }
+  .character_add .character__name {
+    opacity: 0.5; }
+  .character_add i {
+    color: #549F5D;
+    font-size: 45px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 27px; }
   .character__avatar {
     padding-bottom: 9px; }
     .character__avatar > .avatar > * {
       height: 72px;
       width: 72px; }
+  .character__name__highlight {
+    background-color: #F7E03E;
+    box-shadow: 0 0 0.9px #5A6978; }
   .character__actions {
     display: flex;
     flex-direction: row;
@@ -65,6 +77,7 @@ a {
       margin-right: 3.6px;
       font-size: 80%;
       color: #73BD7C;
-      visibility: hidden; }
+      visibility: hidden;
+      text-shadow: 0 0 0.9px #5A6978; }
       .character__actions__online_true {
         visibility: visible; }

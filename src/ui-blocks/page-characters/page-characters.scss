@@ -1,2 +1,8 @@
 @import "../../globals.scss";
 
+
+.page-characters {
+	&__list {
+		padding-top: 10 * $base-unit;
+	}
+}

@@ -1,0 +1,22 @@
+@import "../../globals.scss";
+
+
+.filters {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+
+	.filters-control {
+		margin-left: 20 * $base-unit;
+	}
+
+	.input {
+		flex: 1;
+
+		input {
+			width: 100%;
+			min-width: 0 !important;
+		}
+	}
+}

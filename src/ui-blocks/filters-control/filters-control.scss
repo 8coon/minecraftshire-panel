@@ -1,0 +1,45 @@
+@import "../../globals.scss";
+
+
+.filters-control {
+	display: inline-flex;
+	flex-direction: row;
+	background-color: $light;
+	border-radius: $border-radius;
+	overflow: hidden;
+
+	&__filter {
+		padding: 5 * $base-unit 20 * $base-unit;
+		cursor: pointer;
+		text-align: center;
+		display: inline-flex;
+		align-items: center;
+
+		&:hover {
+			background-color: lighten($gray, 40%);
+		}
+
+		&:active, &_active {
+			background-color: $gray;
+
+			&:hover {
+				background-color: $gray;
+			}
+		}
+
+		&_favorite {
+			color: $yellow;
+			text-shadow: 0 0 1 * $base-unit $gray;
+		}
+
+		&_online {
+			font-size: 70%;
+			color: $light-green;
+			text-shadow: 0 0 1 * $base-unit $gray;
+
+			i {
+				margin-top: 2 * $base-unit;
+			}
+		}
+	}
+}

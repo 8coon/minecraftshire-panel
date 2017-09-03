@@ -22,5 +22,15 @@ a {
     text-decoration: none;
     color: #343F4B; }
 
-.page-characters__list {
-  padding-top: 9px; }
+.filters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; }
+  .filters .filters-control {
+    margin-left: 18px; }
+  .filters .input {
+    flex: 1; }
+    .filters .input input {
+      width: 100%;
+      min-width: 0 !important; }
