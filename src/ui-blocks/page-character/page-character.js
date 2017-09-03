@@ -54,6 +54,7 @@ export default class PageCharacter extends Component {
 
         this.onSkinChangeClick = this.onSkinChangeClick.bind(this);
         this.onDeleteClick = this.onDeleteClick.bind(this);
+        this.onRestoreClick = this.onRestoreClick.bind(this);
     }
 
     onSkinChangeClick() {
@@ -95,9 +96,27 @@ export default class PageCharacter extends Component {
             });
     }
 
+    onRestoreClick() {
+        const character = this.context.model.character;
+        const id = character.get('id');
+
+        restoreCharacter(id)
+            .then(() => {
+                this.context.model.forced = true;
+                this.context.router.history.push(PageCharacter.getUrl(character));
+
+                window.setTimeout(() => LayerNotify.addNotify({text: 'Персонаж успешно восстановлен.'}), 100);
+            })
+            .catch(err => {
+                console.error(err);
+                LayerNotify.addNotify({text: 'Что-то пошло не так!'});
+            });
+    }
+
     render() {
         const model = this.context.model.character;
         const sameOwner = model.get('owner') === this.context.model.user.get('username');
+        const deleted = model.get('isDeleted');
 
         return (
             <LayoutMain title={`Персонаж ${model.get('firstName')} ${model.get('lastName')}`}
@@ -117,9 +136,15 @@ export default class PageCharacter extends Component {
                             Создан: <strong>{formatDate(model.getCreatedAt())}</strong>
                         </div>
 
-                        {sameOwner && (
+                        {sameOwner && !deleted && (
                             <div>
                                 <a href="#delete" onClick={this.onDeleteClick}>Удалить</a>
+                            </div>
+                        )}
+
+                        {sameOwner && deleted && (
+                            <div>
+                                <a href="#restore" onClick={this.onRestoreClick}>Восстановить</a>
                             </div>
                         )}
                     </div>
