@@ -17,9 +17,6 @@ import profile from 'minecraftshire-jsapi/src/method/user/profile';
 // Services
 import Status from '../../services/status';
 
-// Sitemap
-import Sitemap from '../../sitemap';
-
 
 export default class PageCharacters extends Component {
 
@@ -42,7 +39,7 @@ export default class PageCharacters extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {filters: {favorite: false, online: false, query: ''}};
+        this.state = {filters: {favorite: false, online: false, deleted: false, query: ''}};
 
         this.onFiltersChange = this.onFiltersChange.bind(this);
         this.onAddClick = this.onAddClick.bind(this);
@@ -66,6 +63,14 @@ export default class PageCharacters extends Component {
                 }
 
                 if (filters.online && !char.get('isOnline')) {
+                    return false;
+                }
+
+                if (filters.deleted && !char.get('isDeleted')) {
+                    return false;
+                }
+
+                if (!filters.deleted && char.get('isDeleted')) {
                     return false;
                 }
 

@@ -41,5 +41,10 @@
 				margin-top: 2 * $base-unit;
 			}
 		}
+
+		&_deleted {
+			color: $red;
+			text-shadow: 0 0 1 * $base-unit transparentize($gray, 0.5);
+		}
 	}
 }

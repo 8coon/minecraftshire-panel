@@ -49,3 +49,6 @@ a {
       text-shadow: 0 0 0.9px #5A6978; }
       .filters-control__filter_online i {
         margin-top: 1.8px; }
+    .filters-control__filter_deleted {
+      color: #DA7666;
+      text-shadow: 0 0 0.9px rgba(90, 105, 120, 0.5); }

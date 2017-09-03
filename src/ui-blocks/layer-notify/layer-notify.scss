@@ -36,7 +36,7 @@ $notify-height: 50;
 		border-radius: 3 * $border-radius;
 		font-family: $font-family-default;
 		font-size: $font-size-default;
-		font-weight: $font-weight-button;
+		font-weight: $font-weight-default;
 		color: $white;
 		padding: $input-padding;
 		opacity: $opacity-notify-box;
@@ -51,13 +51,14 @@ $notify-height: 50;
 
 	&__action {
 		text-align: right;
+		font-weight: $font-weight-button;
 
 		a {
 			color: $light-gray;
 
-			&_hover {
+			&:hover {
 				text-decoration: none;
-				color: $white;
+				color: $white !important;
 			}
 		}
 	}

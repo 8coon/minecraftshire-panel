@@ -5,7 +5,7 @@ import './filters-control.css';
 export default class FiltersControl extends Component {
 
     static defaultProps = {
-        filters: {favorite: false, online: false},
+        filters: {favorite: false, online: false, deleted: false},
         onChange: () => {},
     };
 
@@ -14,6 +14,7 @@ export default class FiltersControl extends Component {
 
         this.onFavoriteClick = this.onFavoriteClick.bind(this);
         this.onOnlineClick = this.onOnlineClick.bind(this);
+        this.onDeletedClick = this.onDeletedClick.bind(this);
     }
 
     toggleFilter(name) {
@@ -26,6 +27,10 @@ export default class FiltersControl extends Component {
 
     onOnlineClick() {
         this.toggleFilter('online');
+    }
+
+    onDeletedClick() {
+        this.toggleFilter('deleted');
     }
 
     render() {
@@ -45,6 +50,14 @@ export default class FiltersControl extends Component {
                      onClick={this.onOnlineClick}
                      title="Показать персонажей в сети">
                     <i className="fa fa-circle" aria-hidden="true"/>
+                </div>
+
+                <div className={`filters-control__filter filters-control__filter_deleted ${
+                    this.props.filters.deleted ? 'filters-control__filter_active' : ''
+                    }`}
+                     onClick={this.onDeletedClick}
+                     title="Показать удалённых персонажей">
+                    <i className="fa fa-trash-o" aria-hidden="true"/>
                 </div>
             </div>
         )

@@ -18,9 +18,6 @@ import Validators from '../../utils/validators/validators';
 // Requests
 import createCharacter from 'minecraftshire-jsapi/src/method/character/create';
 
-// Sitemap
-import Sitemap from '../../sitemap';
-
 // Models
 import Character from 'minecraftshire-jsapi/src/models/Character/Character';
 

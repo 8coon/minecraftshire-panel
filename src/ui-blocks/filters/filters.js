@@ -9,7 +9,7 @@ import Input from '../input/input';
 export default class Filters extends Component {
 
     static defaultProps = {
-        filters: {favorite: false, online: false, query: ''},
+        filters: {favorite: false, online: false, deleted: false, query: ''},
         onChange: () => {},
     };
 
